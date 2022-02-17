@@ -1,24 +1,39 @@
 
 <h1>
-  Hola Mundo
+  TE AMO NAT <3
 </h1>
 
 <div class="row">
   <div class="col text-center">
-    <img src="assets/img/9.png" class="ahorcado-img">
-    <h3>Intentos <small>3 / 9</small> </h3>
+    <img src="assets/img/{{intentos}}.png" class="ahorcado-img">      <!-- INDEXAR la variable de intentos en la ruta de la imagen -->
+    <h3>Intentos <small>{{intentos}} / 9</small> </h3>
   </div>
 </div>
 
 <div class="row">
   <div class="col text-center">
-    <h1>_ _ _ _ _ _ _</h1>
+    <h1> {{ palabraOculta }} </h1>
   </div>
 </div>
 
-<div class="row">
+<div class="row" *ngIf="gana">     <!--En caso de que ganar sea verdadero, mostrar el mensaje-->
   <div class="col text-center">
-    <button *ngFor="let letra of letras" class="btn btn-primary">
+    <h1>FELICIDADES GANASTE!!!</h1>
+    <h4>:D</h4>
+  </div>
+</div>
+
+<div class="row" *ngIf="pierde">   <!--En caso de que pierda, mostrar el mensaje-->
+  <div class="col text-center">
+    <h1>UYYY! :(  Lo siento mucho, perdiste!</h1>
+    <h4>Mas suerte para la proxima...</h4>
+    <h3>La palabra era: {{palabra}} </h3>
+  </div>
+</div>
+
+<div class="row" *ngIf="!gana && !pierde">    <!--Si gana ocultar el teclado-->
+  <div class="col text-center">
+    <button (click)="comprobar(letra)" *ngFor="let letra of letras" class="btn btn-primary">   <!--ngFor="let letra of letras" permite repetir una linea de codigo por medio de for: CODIGO TIPO ANGULAR -->
       {{ letra }}
     </button>
   </div>
